@@ -18,6 +18,11 @@ var messages = [{
 io.on('connection', function(socket){
     console.log('New machine connected IP: ' + socket.handshake.address);
     socket.emit('messages', messages);
+
+    socket.on('add-message', function(data){
+        messages.push(data);
+        io.sockets.emit('messages', messages);
+    });
 });
 
 server.listen(6677, function(){
