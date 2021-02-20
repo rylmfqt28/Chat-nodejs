@@ -5,7 +5,7 @@ var io = require('socket.io')(server);
 
 app.use(express.static('client'));
 
-app.get("/hello", function(req, res){
+app.get("/", function(req, res){
     res.status(200).send('Hello your connection at server is successful')
 });
 
@@ -18,7 +18,7 @@ var messages = [{
 io.on('connection', function(socket){
     console.log('New machine connected IP: ' + socket.handshake.address);
     socket.emit('messages', messages);
-})
+});
 
 server.listen(6677, function(){
     console.log('Server running in the port: 6677');
